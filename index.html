@@ -49,6 +49,22 @@ main{position:relative;z-index:2}
 @media(max-width:600px){.brand-name{font-size:10px;letter-spacing:1.5px}.farm-watermark{bottom:6px}.watermark-chicken{font-size:48px}.farm-watermark div:last-child{font-size:10px}}
 
 .cycle-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;margin-top:15px}.cycle-card{background:linear-gradient(145deg,#111d30,#0b1320);border:1px solid #263650;border-radius:18px;padding:18px}.cycle-card.closed{opacity:.92}.cycle-status{display:inline-block;padding:5px 9px;border-radius:20px;font-size:11px;background:#123424;color:#76e7a7}.cycle-status.closed{background:#352b16;color:#f4c95d}.cycle-card h3{margin:10px 0 5px}.cycle-meta{color:#9fb0c8;font-size:13px}.cycle-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.cycle-stat{background:#0a1220;border-radius:10px;padding:10px}.cycle-stat b{display:block;margin-top:4px}.cycle-actions{display:flex;gap:7px;flex-wrap:wrap}.cycle-actions .btn{flex:1}.cycle-detail{margin-top:18px;padding:18px;background:#0c1626;border:1px solid #263550;border-radius:16px}.cycle-nav{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-bottom:12px}.cycle-nav .btn{flex:1}.cycle-detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.cycle-detail-box{background:#101c2d;border-radius:12px;padding:12px}.cycle-detail-box b{font-size:20px;display:block;margin-top:5px}@media(max-width:600px){.cycle-stats,.cycle-detail-grid{grid-template-columns:1fr 1fr}}
+
+/* Shipment workspace: clear parcel counts and full load details */
+:root{--surface:#101b2e;--surface-soft:#0c1626;--highlight:#79e8ac;--highlight-soft:rgba(53,208,127,.12)}
+body{background:radial-gradient(circle at 78% -15%,#1b3a52 0,transparent 31%),linear-gradient(135deg,#07101b 0%,#0d1728 55%,#08111d 100%)}
+aside{background:linear-gradient(180deg,#0d192b 0%,#08111e 100%);box-shadow:-12px 0 30px rgba(0,0,0,.12)}
+.nav button{transition:background .2s ease,color .2s ease,transform .2s ease}.nav button:hover{transform:translateX(-3px)}
+.grid{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}.card{background:linear-gradient(145deg,rgba(20,33,54,.96),rgba(12,22,38,.96));border-color:rgba(101,133,174,.22)}
+.stat{position:relative;overflow:hidden}.stat:after{content:"";position:absolute;width:96px;height:96px;left:-36px;bottom:-48px;border-radius:50%;background:var(--highlight-soft);filter:blur(2px)}
+.modal{backdrop-filter:blur(7px)}.modalbox{box-shadow:0 24px 70px rgba(0,0,0,.42);border-color:rgba(121,232,172,.22)}
+.chicken-box{background:linear-gradient(145deg,rgba(15,34,42,.98),rgba(10,22,35,.98));border-color:rgba(121,232,172,.24);padding:18px}
+.chicken-box .mini-grid{grid-template-columns:repeat(4,minmax(130px,1fr))}
+.bale-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:15px}.bale-stat{min-height:96px;padding:13px;border:1px solid rgba(115,145,180,.2);border-radius:14px;background:rgba(5,14,27,.48);text-align:right}.bale-stat>span{display:block;color:var(--muted);font-size:12px}.bale-stat b{display:block;font-size:24px;line-height:1.2;margin-top:7px}.bale-stat b small{font-size:12px;font-weight:700;color:var(--muted)}.bale-stat em{display:block;font-style:normal;font-size:11px;color:var(--muted);margin-top:5px}.bale-stat.is-counted{background:linear-gradient(145deg,rgba(53,208,127,.19),rgba(17,47,43,.55));border-color:rgba(121,232,172,.48)}.bale-stat.is-counted b{color:var(--highlight)}
+.car-card{position:relative;overflow:hidden;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}.car-card:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.8}.car-card:hover{transform:translateY(-3px);border-color:rgba(121,232,172,.45);box-shadow:0 16px 30px rgba(0,0,0,.25)}.car-stat{border:1px solid rgba(101,133,174,.12)}.car-stat small{color:var(--muted);font-size:11px}.car-stat b{margin-top:4px}.car-actions{margin-top:14px}.car-actions .btn{font-size:12px}
+.parcel-inline{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border-radius:999px;background:rgba(53,208,127,.1);color:#9cf0be;font-size:11px;font-weight:800;white-space:nowrap}.table-action{white-space:nowrap}
+.shipment-details{display:grid;gap:16px}.shipment-hero{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:18px;border:1px solid rgba(121,232,172,.22);border-radius:16px;background:linear-gradient(135deg,rgba(20,56,55,.72),rgba(13,25,41,.92))}.shipment-hero h3{margin:7px 0 4px;font-size:22px}.shipment-hero p{margin:0;color:var(--muted);font-size:13px}.shipment-state{padding:7px 10px;border-radius:99px;background:rgba(53,208,127,.15);color:#9cf0be;font-size:12px;font-weight:800}.detail-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.detail-kpi{padding:13px;border-radius:13px;background:var(--surface-soft);border:1px solid rgba(101,133,174,.18)}.detail-kpi span{display:block;color:var(--muted);font-size:11px}.detail-kpi b{display:block;margin-top:6px;font-size:18px}.detail-block{border:1px solid rgba(101,133,174,.18);border-radius:15px;padding:16px;background:rgba(8,17,31,.32)}.detail-block h4{margin:0 0 12px;font-size:14px}.detail-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.detail-item{padding:10px;border-radius:10px;background:rgba(16,31,50,.78)}.detail-item span{display:block;color:var(--muted);font-size:11px}.detail-item b{display:block;margin-top:4px;font-size:14px}.shipment-batches{min-width:0!important}.shipment-batches th,.shipment-batches td{padding:10px}.shipment-footer{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+@media(max-width:720px){.chicken-box .mini-grid,.bale-summary,.detail-kpis,.detail-list{grid-template-columns:repeat(2,minmax(0,1fr))}.shipment-hero{display:block}.shipment-state{display:inline-block;margin-top:12px}}@media(max-width:420px){.bale-summary,.detail-kpis,.detail-list{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -85,7 +101,7 @@ main{position:relative;z-index:2}
  <section id="sales" class="page">
   <div class="section card">
    <div class="section-title"><h2>سجل عمليات البيع</h2><button class="btn secondary" onclick="openSale()">▶ استئناف / متابعة</button> <button class="btn primary" onclick="clearDraft();openSale()">＋ حمولة جديدة</button></div>
-   <div class="tablewrap"><table><thead><tr><th>التاريخ</th><th>العربية</th><th>صاحبها</th><th>الدورة</th><th>الفاضي</th><th>المليان</th><th>الصافي</th><th>السعر</th><th>الإجمالي</th><th></th></tr></thead><tbody id="salesTable"></tbody></table></div>
+   <div class="tablewrap"><table><thead><tr><th>التاريخ</th><th>صاحب العربية</th><th>الدورة</th><th>الوزنات</th><th>الطرود</th><th>الصافي</th><th>السعر</th><th>الإجمالي</th><th>التفاصيل</th><th></th></tr></thead><tbody id="salesTable"></tbody></table></div>
   </div>
  </section>
 
@@ -120,7 +136,15 @@ function normalizeDb(x,user){
  x=x&&typeof x==='object'?x:emptyDb(user);
  x.user=user||x.user||'مستخدم الجهاز'; x.chickenStock=Number(x.chickenStock)||0;
  x.cycles=(x.cycles||[]).map(c=>({...c,closed:!!c.closed,counterChicken:Number(c.counterChicken)||0,counterNet:Number(c.counterNet)||0,counterDue:Number(c.counterDue)||0}));
- x.cars=x.cars||[]; x.sales=x.sales||[]; return x;
+ x.cars=x.cars||[];
+ x.sales=(x.sales||[]).map(s=>({
+   ...s,
+   batches:Array.isArray(s.batches)?s.batches:[],
+   baleWeight:Number(s.baleWeight)||8.2,
+   actualBales:Math.max(0,Math.floor(Number(s.actualBales)||0)),
+   chickensPerBale:Math.max(0,Math.floor(Number(s.chickensPerBale)||0))
+ }));
+ return x;
 }
 function loadLocalData(){
  let raw=localStorage.getItem(KEY);
@@ -143,11 +167,15 @@ function saveDraft(){
  const month=document.getElementById('cmonth')?.value||''; const year=document.getElementById('cyear')?.value||'';
  const price=document.getElementById('price')?.value||'';
  const cycle=document.getElementById('scycle')?.value||'';
+ const baleWeight=document.getElementById('baleWeight')?.value||'8.2';
+ const customBaleWeight=document.getElementById('customBaleWeight')?.value||'8.2';
+ const chickensPerBale=document.getElementById('chickensPerBale')?.value||'12';
+ const actualBales=document.getElementById('actualBales')?.value||'0';
  const rows=[...document.querySelectorAll('#weights tr')].map(tr=>({
    empty:tr.querySelector('.wempty')?.value||'',
    full:tr.querySelector('.wfull')?.value||''
  }));
- localStorage.setItem(draftKey(),JSON.stringify({owner,cycle,price,rows}));
+ localStorage.setItem(draftKey(),JSON.stringify({owner,cycle,price,rows,baleWeight,customBaleWeight,chickensPerBale,actualBales,manualBales:!!window._manualBales}));
 }
 function loadDraft(){
  try{return JSON.parse(localStorage.getItem(draftKey())||'null')}catch{return null}
@@ -181,16 +209,25 @@ function updateChickenEstimate(){
  const bw=bwSel.value==='custom'?(Number(document.getElementById('customBaleWeight')?.value)||8.2):Number(bwSel.value)||8.2;
  const per=Math.max(0,Math.floor(Number(document.getElementById('chickensPerBale')?.value)||0));
  const empty=[...document.querySelectorAll('.wempty')].reduce((a,x)=>a+(Number(x.value)||0),0);
- const est=bw>0?empty/bw:0;
+ const full=[...document.querySelectorAll('.wfull')].reduce((a,x)=>a+(Number(x.value)||0),0);
+ const net=Math.max(0,full-empty);
+ const est=bw>0?net/bw:0;
  const actualEl=document.getElementById('actualBales');
  if(actualEl && (!window._manualBales || actualEl.value==='0')) actualEl.value=Math.max(0,Math.round(est));
- const actual=Number(actualEl?.value)||0;
+ const actual=Math.max(0,Math.floor(Number(actualEl?.value)||0));
  const taken=actual*per;
  const stock=getChickenStock();
  const set=(id,val)=>{const e=document.getElementById(id);if(e)e.textContent=fmt(val)};
- set('estimatedBales',est); set('estimatedChickens',taken); set('remainingChickens',stock-taken);
+ set('estimatedBales',est); set('calculatedBales',actual); set('estimatedChickens',taken); set('remainingChickens',stock-taken);
+ const hint=document.getElementById('baleEstimateHint');
+ if(hint)hint.textContent=`على أساس ${fmt(bw)} كجم من الصافي / طرد`;
+ const variance=document.getElementById('baleVariance');
+ if(variance){
+   const diff=actual-Math.round(est);
+   variance.textContent=diff===0?'مطابق للتقدير':diff>0?`+${fmt(diff)} طرد عن التقدير`:`${fmt(Math.abs(diff))} طرد أقل من التقدير`;
+ }
 }
-function markManualBales(){window._manualBales=true;updateChickenEstimate()}
+function markManualBales(){window._manualBales=true;updateChickenEstimate();saveDraft()}
 function openSale(editId=null){
  window.editingSaleId=editId||null; window._manualBales=false;
  let cycleOpts=db.cycles.filter(c=>!c.closed).map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
@@ -214,24 +251,34 @@ function openSale(editId=null){
    <div style="margin-top:15px;font-size:22px;font-weight:900">المبلغ المستحق: <span id="ptotal" class="gold">0 ج.م</span></div>
  </div>
  <div class="chicken-box">
-   <div class="section-title" style="margin:0 0 10px"><h3 style="margin:0">🐔 تقدير عدد الفراخ — للتقريب فقط</h3><span class="pill">لا يدخل في حساب الوزن أو السعر</span></div>
+   <div class="section-title" style="margin:0 0 10px"><h3 style="margin:0">🐔 حساب الطرود والفراخ</h3><span class="pill">مبني على الوزن الصافي ولا يؤثر على السعر</span></div>
    <div class="mini-grid">
-    <div class="field"><label>وزن الطرد التقريبي</label><select id="baleWeight" onchange="document.getElementById('customWeightWrap').style.display=this.value==='custom'?'block':'none';updateChickenEstimate()"><option value="8.2">8.2 كجم</option><option value="8.5">8.5 كجم</option><option value="custom">مخصص</option></select></div>
-    <div class="field" id="customWeightWrap" style="display:none"><label>وزن الطرد المخصص</label><input id="customBaleWeight" type="number" step="0.1" value="8.2" oninput="updateChickenEstimate()"></div>
-    <div class="field"><label>متوسط الفراخ في الطرد</label><input id="chickensPerBale" type="number" min="1" step="1" value="12" oninput="updateChickenEstimate()"></div>
-    <div class="field"><label>عدد الطرود الفعلي <small>(عدّله براحتك)</small></label><input id="actualBales" type="number" min="0" step="1" value="0" oninput="updateChickenEstimate()"></div>
+    <div class="field"><label>وزن الطرد التقريبي</label><select id="baleWeight" onchange="document.getElementById('customWeightWrap').style.display=this.value==='custom'?'block':'none';updateChickenEstimate();saveDraft()"><option value="8.2">8.2 كجم</option><option value="8.5">8.5 كجم</option><option value="custom">مخصص</option></select></div>
+    <div class="field" id="customWeightWrap" style="display:none"><label>وزن الطرد المخصص</label><input id="customBaleWeight" type="number" step="0.1" value="8.2" oninput="updateChickenEstimate();saveDraft()"></div>
+    <div class="field"><label>متوسط الفراخ في الطرد</label><input id="chickensPerBale" type="number" min="1" step="1" value="12" oninput="updateChickenEstimate();saveDraft()"></div>
+    <div class="field"><label>عدد الطرود المحتسبة <small>(يمكن تعديله يدويًا)</small></label><input id="actualBales" type="number" min="0" step="1" value="0" oninput="markManualBales()"></div>
    </div>
-   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;text-align:center">
-    <div><small style="color:var(--muted)">الطرود التقديرية</small><br><b id="estimatedBales">0</b></div>
-    <div><small style="color:var(--muted)">الفراخ المتوقعة</small><br><b id="estimatedChickens" class="green">0</b></div>
-    <div><small style="color:var(--muted)">المتبقي بعد العربية</small><br><b id="remainingChickens" class="gold">0</b></div>
+   <div class="bale-summary">
+    <div class="bale-stat"><span>الطرود التقديرية</span><b><span id="estimatedBales">0</span> <small>طرد</small></b><em id="baleEstimateHint">على أساس الوزن الصافي</em></div>
+    <div class="bale-stat is-counted"><span>الطرود المحتسبة</span><b><span id="calculatedBales">0</span> <small>طرد</small></b><em id="baleVariance">مطابق للتقدير</em></div>
+    <div class="bale-stat"><span>الفراخ المحتسبة</span><b id="estimatedChickens" class="green">0</b><em>حسب متوسط الفراخ في الطرد</em></div>
+    <div class="bale-stat"><span>المتبقي بعد الحمولة</span><b id="remainingChickens" class="gold">0</b><em>من رصيد المزرعة</em></div>
    </div>
  </div>
- <div class="note" style="margin-top:10px">💾 كل وزنة يتم حفظها تلقائيًا. لو قفلت البرنامج قبل إكمال المليان، افتح «استئناف حمولة» وستجد البيانات كما هي.</div> لو قفلت البرنامج قبل إكمال المليان، افتح «استئناف حمولة» وستجد البيانات كما هي.</div>
+ <div class="note" style="margin-top:10px">💾 كل وزنة وإعدادات الطرود تحفظ تلقائيًا. يمكنك الرجوع إلى «استئناف حمولة» في أي وقت.</div>
  <button class="btn primary" style="margin-top:15px" onclick="addSale(window.editingSaleId||null)">حفظ الحمولة كاملة</button>
  <button class="btn secondary" style="margin-top:10px" onclick="clearDraft();closeModal();toast('تم إلغاء المسودة')">إلغاء المسودة</button>`;
  document.getElementById('modal').classList.add('show');
  if(draft?.cycle && document.getElementById('scycle')) document.getElementById('scycle').value=draft.cycle;
+ if(!editId && draft){
+   const baleSelect=document.getElementById('baleWeight');
+   if(baleSelect && draft.baleWeight) baleSelect.value=draft.baleWeight;
+   if(document.getElementById('customBaleWeight')) document.getElementById('customBaleWeight').value=draft.customBaleWeight||8.2;
+   if(document.getElementById('customWeightWrap')) document.getElementById('customWeightWrap').style.display=draft.baleWeight==='custom'?'block':'none';
+   if(document.getElementById('chickensPerBale')) document.getElementById('chickensPerBale').value=draft.chickensPerBale||12;
+   if(document.getElementById('actualBales')) document.getElementById('actualBales').value=draft.actualBales||0;
+   window._manualBales=!!draft.manualBales;
+ }
  if(editId){ const ex=db.sales.find(x=>x.id==editId); if(ex && document.getElementById('scycle')) document.getElementById('scycle').value=ex.cycle; }
  if(editId){const ex=db.sales.find(x=>x.id==editId); if(ex){if(document.getElementById('baleWeight'))document.getElementById('baleWeight').value=(ex.baleWeight===8.2||ex.baleWeight===8.5)?String(ex.baleWeight):'custom'; if(document.getElementById('customBaleWeight'))document.getElementById('customBaleWeight').value=ex.baleWeight||8.2; if(document.getElementById('customWeightWrap'))document.getElementById('customWeightWrap').style.display=(ex.baleWeight!==8.2&&ex.baleWeight!==8.5)?'block':'none'; if(document.getElementById('chickensPerBale'))document.getElementById('chickensPerBale').value=ex.chickensPerBale||12; if(document.getElementById('actualBales'))document.getElementById('actualBales').value=ex.actualBales||0; window._manualBales=true;}}
  applyWeightZoom();
@@ -242,7 +289,6 @@ function openSale(editId=null){
  }
  document.querySelectorAll('#weights input').forEach(x=>x.addEventListener('input',()=>{saveDraft();preview()}));
  showOwnerHistory(); preview(); updateChickenEstimate();
- document.getElementById('actualBales')?.addEventListener('input',markManualBales);
 }
 
 function showOwnerHistory(){
@@ -298,7 +344,7 @@ async function addSale(editId=null){
  const old=db.sales.find(x=>x.id==editId);
  let stock=getChickenStock();
  if(editId && old) stock += Number(old.chickensTaken)||0;
- const record={id:editId||Date.now(),createdAt:editId?(old?.createdAt||old?.id||Date.now()):Date.now(),date:editId?(old?.date||new Date().toISOString().slice(0,10)):new Date().toISOString().slice(0,10),owner,cycle:cycleObj.id,price,batches,empty:totalEmpty,full:totalFull,net,total:net*price,baleWeight,chickensPerBale,estimatedBales:totalEmpty/baleWeight,actualBales,chickensTaken};
+ const record={id:editId||Date.now(),createdAt:editId?(old?.createdAt||old?.id||Date.now()):Date.now(),date:editId?(old?.date||new Date().toISOString().slice(0,10)):new Date().toISOString().slice(0,10),owner,cycle:cycleObj.id,price,batches,empty:totalEmpty,full:totalFull,net,total:net*price,baleWeight,chickensPerBale,estimatedBales:net/baleWeight,actualBales,countedBales:actualBales,chickensTaken};
  db.chickenStock=stock-chickensTaken;
  if(editId){ const idx=db.sales.findIndex(x=>x.id==editId); if(idx>=0) db.sales[idx]=record; else db.sales.unshift(record); toast('تم تعديل الحمولة وتحديث عدد الفراخ ✓'); }
  else { db.sales.unshift(record); toast('تم حفظ الحمولة وأضيفت كعربية جديدة ✓'); }
@@ -348,13 +394,48 @@ function renderCycleCards(){const el=document.getElementById('cycleCards');if(!e
 function openCar(){document.getElementById('modalTitle').textContent='إضافة عربية';document.getElementById('modalBody').innerHTML=`<div class="formgrid"><div class="field"><label>اسم صاحب العربية</label><input id="owner" placeholder="الاسم"></div><div class="field"><label>رقم العربية</label><input id="plate" placeholder="اختياري"></div><div class="field"><label>رقم الهاتف</label><input id="phone" placeholder="اختياري"></div></div><button class="btn primary" style="margin-top:15px" onclick="addCar()">حفظ</button>`;document.getElementById('modal').classList.add('show')}
 function addCar(){if(!owner.value)return toast('اكتب اسم صاحب العربية');db.cars.push({id:Date.now(),owner:owner.value,plate:plate.value,phone:phone.value});save();closeModal();toast('تمت إضافة العربية ✓')}
 function closeModal(){document.getElementById('modal').classList.remove('show')}
+function esc(value){return String(value??'').replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]))}
+function shipmentBaleEstimate(s){const weight=Number(s?.baleWeight)||8.2;return weight>0?Math.max(0,Number(s?.net)||0)/weight:0}
+function shipmentBaleCount(s){return Math.max(0,Math.floor(Number(s?.countedBales??s?.actualBales)||0))}
+function shipmentBaleDifference(s){return shipmentBaleCount(s)-Math.round(shipmentBaleEstimate(s))}
+function shipmentBaleLabel(s){const estimated=shipmentBaleEstimate(s), counted=shipmentBaleCount(s);return `<span class="parcel-inline">${fmt(counted)} محتسبة / ${fmt(estimated)} تقديرية</span>`}
+function openShipmentDetails(id){
+ const s=db.sales.find(x=>String(x.id)===String(id));
+ if(!s)return toast('لم يتم العثور على الحمولة');
+ const batches=Array.isArray(s.batches)?s.batches:[];
+ const estimated=shipmentBaleEstimate(s), counted=shipmentBaleCount(s), diff=shipmentBaleDifference(s);
+ const diffText=diff===0?'العد مطابق للتقدير':diff>0?`${fmt(diff)} طرد زيادة عن التقدير`:`${fmt(Math.abs(diff))} طرد أقل من التقدير`;
+ const batchRows=batches.map((b,i)=>{const empty=Number(b.empty)||0,full=Number(b.full)||0;return `<tr><td>${i+1}</td><td>${fmt(empty)} كجم</td><td>${fmt(full)} كجم</td><td><strong class="green">${fmt(full-empty)} كجم</strong></td></tr>`}).join('')||'<tr><td colspan="4" class="empty">لا توجد وزنات محفوظة لهذه الحمولة</td></tr>';
+ const safeId=Number(s.id);
+ document.getElementById('modalTitle').textContent='تفاصيل الحمولة';
+ document.getElementById('modalBody').innerHTML=`<div class="shipment-details">
+   <div class="shipment-hero"><div><span class="shipment-state">حمولة محفوظة</span><h3>حمولة ${esc(s.owner||'غير مسجل')}</h3><p>${esc(s.date||'—')} · ${esc(cycleName(s.cycle))} · ${batches.length} وزنة</p></div><div class="gold" style="font-size:24px;font-weight:900">${money(s.total)}</div></div>
+   <div class="detail-kpis">
+    <div class="detail-kpi"><span>إجمالي الفاضي</span><b>${fmt(s.empty)} كجم</b></div>
+    <div class="detail-kpi"><span>إجمالي المليان</span><b>${fmt(s.full)} كجم</b></div>
+    <div class="detail-kpi"><span>الوزن الصافي</span><b class="green">${fmt(s.net)} كجم</b></div>
+    <div class="detail-kpi"><span>المبلغ المستحق</span><b class="gold">${money(s.total)}</b></div>
+   </div>
+   <div class="detail-block"><h4>📦 ملخص الطرود والفراخ</h4><div class="detail-list">
+    <div class="detail-item"><span>الطرود التقديرية</span><b>${fmt(estimated)} طرد</b></div>
+    <div class="detail-item"><span>الطرود المحتسبة</span><b class="green">${fmt(counted)} طرد</b></div>
+    <div class="detail-item"><span>فرق العد</span><b>${diffText}</b></div>
+    <div class="detail-item"><span>وزن الطرد المعتمد</span><b>${fmt(s.baleWeight||8.2)} كجم</b></div>
+    <div class="detail-item"><span>متوسط الفراخ في الطرد</span><b>${fmt(s.chickensPerBale||0)} فرخة</b></div>
+    <div class="detail-item"><span>إجمالي الفراخ المحتسبة</span><b>${fmt(s.chickensTaken||0)} فرخة</b></div>
+   </div></div>
+   <div class="detail-block"><h4>⚖️ سجل الوزنات — سعر الكيلو ${money(s.price)}</h4><div class="tablewrap"><table class="shipment-batches"><thead><tr><th>#</th><th>الفاضي</th><th>المليان</th><th>الصافي</th></tr></thead><tbody>${batchRows}</tbody></table></div></div>
+   <div class="shipment-footer"><button class="btn secondary" onclick="closeModal()">إغلاق</button><button class="btn primary" onclick="closeModal();openSale(${safeId})">✏️ تعديل الحمولة</button></div>
+ </div>`;
+ document.getElementById('modal').classList.add('show');
+}
 function render(){
  document.getElementById('username').textContent=db.user;
  let kg=db.sales.reduce((a,s)=>a+s.net,0), total=db.sales.reduce((a,s)=>a+s.total,0);
  totalKg.textContent=fmt(kg)+' كجم';totalMoney.textContent=money(total);saleCount.textContent=db.sales.length;carCount.textContent=db.sales.length; if(document.getElementById('chickenStock')) document.getElementById('chickenStock').textContent=fmt(getChickenStock())+' فرخة';
- const cg=document.getElementById('carsGrid'); if(cg){ document.getElementById('savedCarCount').textContent=db.sales.length+' عربية'; cg.innerHTML=db.sales.map((s,i)=>`<div class="car-card"><div class="car-icon">🚚</div><h3>العربية ${db.sales.length-i}</h3><div class="car-meta">👤 ${s.owner||'غير مسجل'}<br>📅 ${s.date} — ${cycleName(s.cycle)}</div><div class="car-stats"><div class="car-stat"><small>إجمالي الفاضي</small><b>${fmt(s.empty)} كجم</b></div><div class="car-stat"><small>إجمالي المليان</small><b>${fmt(s.full)} كجم</b></div><div class="car-stat"><small>الصافي</small><b class="green">${fmt(s.net)} كجم</b></div><div class="car-stat"><small>المبلغ</small><b class="gold">${money(s.total)}</b></div><div class="car-stat"><small>الفراخ المأخوذة</small><b>${fmt(s.chickensTaken||0)} فرخة</b></div><div class="car-stat"><small>الطرود الفعلية</small><b>${fmt(s.actualBales||0)} طرد</b></div></div><div class="car-actions"><button class="btn primary" onclick="openSale(${s.id})">✏️ فتح وتعديل</button><button class="btn danger" onclick="delSale(${s.id})">حذف</button></div></div>`).join('')||'<div class="empty">لسه مفيش عربيات محفوظة</div>'; }
+ const cg=document.getElementById('carsGrid'); if(cg){ document.getElementById('savedCarCount').textContent=db.sales.length+' عربية'; cg.innerHTML=db.sales.map((s,i)=>{const id=Number(s.id),estimated=shipmentBaleEstimate(s),counted=shipmentBaleCount(s);return `<div class="car-card"><div class="car-icon">🚚</div><h3>العربية ${db.sales.length-i}</h3><div class="car-meta">👤 ${esc(s.owner||'غير مسجل')}<br>📅 ${esc(s.date||'—')} — ${esc(cycleName(s.cycle))}</div><div class="car-stats"><div class="car-stat"><small>الصافي</small><b class="green">${fmt(s.net)} كجم</b></div><div class="car-stat"><small>المبلغ</small><b class="gold">${money(s.total)}</b></div><div class="car-stat"><small>الطرود التقديرية</small><b>${fmt(estimated)} طرد</b></div><div class="car-stat"><small>الطرود المحتسبة</small><b class="green">${fmt(counted)} طرد</b></div><div class="car-stat"><small>الفراخ المحتسبة</small><b>${fmt(s.chickensTaken||0)} فرخة</b></div><div class="car-stat"><small>عدد الوزنات</small><b>${fmt((s.batches||[]).length)} وزنة</b></div></div><div class="car-actions"><button class="btn secondary" onclick="openShipmentDetails(${id})">عرض التفاصيل</button><button class="btn primary" onclick="openSale(${id})">✏️ تعديل</button><button class="btn danger" onclick="delSale(${id})">حذف</button></div></div>`}).join('')||'<div class="empty">لسه مفيش عربيات محفوظة</div>'; }
  recent.innerHTML=db.sales.slice(0,8).map(s=>`<tr><td>${s.date}</td><td>${s.owner||'غير مسجل'}</td><td>${cycleName(s.cycle)}</td><td>${fmt(s.net)} كجم</td><td>${money(s.price)}</td><td><strong>${money(s.total)}</strong></td></tr>`).join('')||emptyRow(6);
- salesTable.innerHTML=db.sales.map(s=>`<tr><td>${s.date}</td><td><strong>${s.owner||'غير مسجل'}</strong></td><td>${cycleName(s.cycle)}</td><td>${(s.batches||[]).length}</td><td>${fmt(s.empty)}</td><td>${fmt(s.full)}</td><td><strong class="green">${fmt(s.net)}</strong></td><td>${money(s.price)}</td><td><strong class="gold">${money(s.total)}</strong></td><td><button class="btn danger" onclick="delSale(${s.id})">حذف</button></td></tr>`).join('')||emptyRow(10);
+ salesTable.innerHTML=db.sales.map(s=>{const id=Number(s.id);return `<tr><td>${esc(s.date||'—')}</td><td><strong>${esc(s.owner||'غير مسجل')}</strong></td><td>${esc(cycleName(s.cycle))}</td><td>${fmt((s.batches||[]).length)}</td><td>${shipmentBaleLabel(s)}</td><td><strong class="green">${fmt(s.net)} كجم</strong></td><td>${money(s.price)}</td><td><strong class="gold">${money(s.total)}</strong></td><td class="table-action"><button class="btn secondary" onclick="openShipmentDetails(${id})">التفاصيل</button></td><td class="table-action"><button class="btn secondary" onclick="openSale(${id})">تعديل</button> <button class="btn danger" onclick="delSale(${id})">حذف</button></td></tr>`}).join('')||emptyRow(10);
  renderCycleCards();
  let owners={};db.sales.forEach(s=>{let o=s.owner||'غير مسجل';owners[o]??={n:0,k:0,m:0};owners[o].n++;owners[o].k+=s.net;owners[o].m+=s.total});
 if(document.getElementById('ownersTable')) ownersTable.innerHTML=Object.entries(owners).map(([o,v])=>`<tr><td><strong>${o}</strong></td><td>${v.n}</td><td>${fmt(v.k)} كجم</td><td>${money(v.m)}</td></tr>`).join('')||emptyRow(4);
@@ -376,11 +457,19 @@ function emptyRow(n){return `<tr><td colspan="${n}" class="empty">لا توجد 
 function carName(id){return db.cars.find(c=>c.id==id)?.owner||'غير مسجل'}
 function monthsName(m){return ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'][Number(m)-1]||'—'}
 function cycleName(id){return db.cycles.find(c=>c.id==id)?.name||'غير مسجل'}
-async function delSale(id){if(confirm('حذف العملية؟')){db.sales=db.sales.filter(s=>s.id!==id);save();}}
+async function delSale(id){
+ if(!confirm('حذف العملية؟'))return;
+ const sale=db.sales.find(s=>String(s.id)===String(id));
+ if(!sale)return;
+ db.chickenStock=getChickenStock()+(Number(sale.chickensTaken)||0);
+ db.sales=db.sales.filter(s=>String(s.id)!==String(id));
+ save();
+ toast('تم حذف الحمولة وإرجاع الفراخ إلى الرصيد ✓');
+}
 function delCycle(id){if(db.sales.some(s=>s.cycle==id))return toast('لا يمكن حذف دورة مرتبطة بعمليات بيع');if(confirm('حذف الدورة؟')){db.cycles=db.cycles.filter(c=>c.id!==id);save()}}
 function delCar(id){if(db.sales.some(s=>s.car==id))return toast('لا يمكن حذف عربية مرتبطة بعمليات بيع');if(confirm('حذف العربية؟')){db.cars=db.cars.filter(c=>c.id!==id);save()}}
 function exportData(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:'application/json'}));a.download='farmpro-backup.json';a.click()}
-function importData(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{db=JSON.parse(r.result);save();toast('تم استيراد النسخة ✓')}catch{toast('الملف غير صالح')}};r.readAsText(f)}
+function importData(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{db=normalizeDb(JSON.parse(r.result),db.user);save();toast('تم استيراد النسخة ✓')}catch{toast('الملف غير صالح')}};r.readAsText(f)}
 function wipe(){if(confirm('سيتم حذف كل بيانات هذا الحساب على هذا الهاتف. هل أنت متأكد؟')){db=emptyDb(document.getElementById('username').textContent||'مستخدم Google');localStorage.setItem(KEY,JSON.stringify(db));render();toast('تم مسح بيانات هذا الحساب نهائيًا على هذا الهاتف ✓')}}
 loadLocalData();
 document.getElementById('login')?.remove();
