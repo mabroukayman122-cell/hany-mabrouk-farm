@@ -64,6 +64,7 @@ aside{background:linear-gradient(180deg,#0d192b 0%,#08111e 100%);box-shadow:-12p
 .car-card{position:relative;overflow:hidden;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}.car-card:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.8}.car-card:hover{transform:translateY(-3px);border-color:rgba(121,232,172,.45);box-shadow:0 16px 30px rgba(0,0,0,.25)}.car-stat{border:1px solid rgba(101,133,174,.12)}.car-stat small{color:var(--muted);font-size:11px}.car-stat b{margin-top:4px}.car-actions{margin-top:14px}.car-actions .btn{font-size:12px}
 .parcel-inline{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border-radius:999px;background:rgba(53,208,127,.1);color:#9cf0be;font-size:11px;font-weight:800;white-space:nowrap}.table-action{white-space:nowrap}
 .shipment-details{display:grid;gap:16px}.shipment-hero{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:18px;border:1px solid rgba(121,232,172,.22);border-radius:16px;background:linear-gradient(135deg,rgba(20,56,55,.72),rgba(13,25,41,.92))}.shipment-hero h3{margin:7px 0 4px;font-size:22px}.shipment-hero p{margin:0;color:var(--muted);font-size:13px}.shipment-state{padding:7px 10px;border-radius:99px;background:rgba(53,208,127,.15);color:#9cf0be;font-size:12px;font-weight:800}.detail-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.detail-kpi{padding:13px;border-radius:13px;background:var(--surface-soft);border:1px solid rgba(101,133,174,.18)}.detail-kpi span{display:block;color:var(--muted);font-size:11px}.detail-kpi b{display:block;margin-top:6px;font-size:18px}.detail-block{border:1px solid rgba(101,133,174,.18);border-radius:15px;padding:16px;background:rgba(8,17,31,.32)}.detail-block h4{margin:0 0 12px;font-size:14px}.detail-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.detail-item{padding:10px;border-radius:10px;background:rgba(16,31,50,.78)}.detail-item span{display:block;color:var(--muted);font-size:11px}.detail-item b{display:block;margin-top:4px;font-size:14px}.shipment-batches{min-width:0!important}.shipment-batches th,.shipment-batches td{padding:10px}.shipment-footer{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.field-label-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.field-label-row label{margin:0}.text-btn{padding:0;background:transparent;color:var(--highlight);font-size:12px;font-weight:800}.text-btn:hover{text-decoration:underline}.sale-cycle-creator{display:none;margin-top:9px;padding:10px;border:1px dashed rgba(121,232,172,.42);border-radius:11px;background:rgba(53,208,127,.07)}.sale-cycle-creator.show{display:block}.sale-cycle-inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}.sale-cycle-creator .btn{width:100%;padding:9px 12px;font-size:12px}
 @media(max-width:720px){.chicken-box .mini-grid,.bale-summary,.detail-kpis,.detail-list{grid-template-columns:repeat(2,minmax(0,1fr))}.shipment-hero{display:block}.shipment-state{display:inline-block;margin-top:12px}}@media(max-width:420px){.bale-summary,.detail-kpis,.detail-list{grid-template-columns:1fr}}
 </style>
 </head>
@@ -209,9 +210,7 @@ function updateChickenEstimate(){
  const bw=bwSel.value==='custom'?(Number(document.getElementById('customBaleWeight')?.value)||8.2):Number(bwSel.value)||8.2;
  const per=Math.max(0,Math.floor(Number(document.getElementById('chickensPerBale')?.value)||0));
  const empty=[...document.querySelectorAll('.wempty')].reduce((a,x)=>a+(Number(x.value)||0),0);
- const full=[...document.querySelectorAll('.wfull')].reduce((a,x)=>a+(Number(x.value)||0),0);
- const net=Math.max(0,full-empty);
- const est=bw>0?net/bw:0;
+ const est=bw>0?empty/bw:0;
  const actualEl=document.getElementById('actualBales');
  if(actualEl && (!window._manualBales || actualEl.value==='0')) actualEl.value=Math.max(0,Math.round(est));
  const actual=Math.max(0,Math.floor(Number(actualEl?.value)||0));
@@ -220,7 +219,7 @@ function updateChickenEstimate(){
  const set=(id,val)=>{const e=document.getElementById(id);if(e)e.textContent=fmt(val)};
  set('estimatedBales',est); set('calculatedBales',actual); set('estimatedChickens',taken); set('remainingChickens',stock-taken);
  const hint=document.getElementById('baleEstimateHint');
- if(hint)hint.textContent=`على أساس ${fmt(bw)} كجم من الصافي / طرد`;
+ if(hint)hint.textContent=`على أساس ${fmt(bw)} كجم من إجمالي الفاضي / طرد`;
  const variance=document.getElementById('baleVariance');
  if(variance){
    const diff=actual-Math.round(est);
@@ -228,15 +227,53 @@ function updateChickenEstimate(){
  }
 }
 function markManualBales(){window._manualBales=true;updateChickenEstimate();saveDraft()}
+const saleCycleMonths=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+function saleCycleMonthOptions(selectedMonth=new Date().getMonth()+1){return saleCycleMonths.map((name,index)=>`<option value="${index+1}" ${index+1===Number(selectedMonth)?'selected':''}>${name}</option>`).join('')}
+function saleCycleYearOptions(selectedYear=new Date().getFullYear()){
+ const year=Number(selectedYear)||new Date().getFullYear();
+ const years=Array.from({length:11},(_,index)=>year-5+index);
+ return years.map(value=>`<option value="${value}" ${value===year?'selected':''}>${value}</option>`).join('');
+}
+function toggleSaleCycleCreator(){
+ const creator=document.getElementById('saleCycleCreator');
+ const trigger=document.getElementById('saleCycleCreatorTrigger');
+ if(!creator)return;
+ const isOpen=creator.classList.toggle('show');
+ if(trigger)trigger.setAttribute('aria-expanded',String(isOpen));
+}
+function addCycleFromSale(){
+ const month=Number(document.getElementById('saleCycleMonth')?.value);
+ const year=Number(document.getElementById('saleCycleYear')?.value);
+ if(!month||!year)return toast('اختر شهر وسنة الدورة');
+ let cycle=db.cycles.find(c=>Number(c.month)===month&&Number(c.year)===year);
+ const isNew=!cycle;
+ if(!cycle){
+   cycle={id:Date.now(),name:`دورة ${saleCycleMonths[month-1]} ${year}`,month,year,closed:false,counterChicken:0,counterNet:0,counterDue:0};
+   db.cycles.push(cycle);
+   save(false);
+ }
+ const select=document.getElementById('scycle');
+ if(select){
+   let option=[...select.options].find(item=>String(item.value)===String(cycle.id));
+   if(!option){option=document.createElement('option');option.value=cycle.id;option.textContent=cycle.name;select.appendChild(option)}
+   select.value=String(cycle.id);
+ }
+ document.getElementById('saleCycleCreator')?.classList.remove('show');
+ document.getElementById('saleCycleCreatorTrigger')?.setAttribute('aria-expanded','false');
+ saveDraft();
+ toast(isNew?'تم إنشاء الدورة واختيارها ✓':'تم اختيار الدورة الموجودة ✓');
+}
 function openSale(editId=null){
  window.editingSaleId=editId||null; window._manualBales=false;
- let cycleOpts=db.cycles.filter(c=>!c.closed).map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
  let draft=loadDraft();
- if(editId){ const existing=db.sales.find(x=>x.id==editId); if(existing){ draft={owner:existing.owner||'',price:existing.price||'',cycle:existing.cycle||'',rows:(existing.batches||[]).map(x=>({empty:x.empty||'',full:x.full||''})),editId:existing.id,baleWeight:existing.baleWeight||'8.2',chickensPerBale:existing.chickensPerBale||12,actualBales:existing.actualBales||0}; } }
+ const existing=editId?db.sales.find(x=>String(x.id)===String(editId)):null;
+ if(existing){ draft={owner:existing.owner||'',price:existing.price||'',cycle:existing.cycle||'',rows:(existing.batches||[]).map(x=>({empty:x.empty||'',full:x.full||''})),editId:existing.id,baleWeight:existing.baleWeight||'8.2',chickensPerBale:existing.chickensPerBale||12,actualBales:existing.actualBales||0}; }
+ const selectedCycle=draft?.cycle;
+ const cycleOpts=db.cycles.filter(c=>!c.closed||String(c.id)===String(selectedCycle)).map(c=>`<option value="${c.id}">${c.name}${c.closed?' — مغلقة':''}</option>`).join('');
  document.getElementById('modalTitle').textContent=editId?'تعديل الحمولة':'تسجيل / استئناف حمولة';
  document.getElementById('modalBody').innerHTML=`<div class="formgrid">
  <div class="field"><label>اسم صاحب العربية</label><input id="sowner" placeholder="مثال: محمد أحمد" value="${draft?.owner||''}" oninput="saveDraft();showOwnerHistory()"></div>
- <div class="field"><label>الدورة — الشهر والسنة</label><select id="scycle" onchange="saveDraft()">${cycleOpts||'<option value="">أنشئ دورة أولًا</option>'}</select></div>
+ <div class="field"><div class="field-label-row"><label>الدورة — الشهر والسنة</label><button id="saleCycleCreatorTrigger" class="text-btn" type="button" aria-expanded="false" onclick="toggleSaleCycleCreator()">＋ إضافة دورة</button></div><select id="scycle" onchange="saveDraft()">${cycleOpts||'<option value="">اختر دورة أو أضف واحدة</option>'}</select><div id="saleCycleCreator" class="sale-cycle-creator"><div class="sale-cycle-inputs"><select id="saleCycleMonth" aria-label="شهر الدورة">${saleCycleMonthOptions()}</select><select id="saleCycleYear" aria-label="سنة الدورة">${saleCycleYearOptions()}</select></div><button class="btn primary" type="button" onclick="addCycleFromSale()">حفظ واختيار الدورة</button></div></div>
  <div class="field"><label>سعر البورصة / الكيلو</label><input id="price" type="number" step="0.01" placeholder="مثال: 105" value="${draft?.price||''}" oninput="saveDraft();preview()"></div>
  </div>
  <div id="ownerHistory" style="margin-top:12px"></div>
@@ -251,7 +288,7 @@ function openSale(editId=null){
    <div style="margin-top:15px;font-size:22px;font-weight:900">المبلغ المستحق: <span id="ptotal" class="gold">0 ج.م</span></div>
  </div>
  <div class="chicken-box">
-   <div class="section-title" style="margin:0 0 10px"><h3 style="margin:0">🐔 حساب الطرود والفراخ</h3><span class="pill">مبني على الوزن الصافي ولا يؤثر على السعر</span></div>
+   <div class="section-title" style="margin:0 0 10px"><h3 style="margin:0">🐔 حساب الطرود والفراخ</h3><span class="pill">مبني على إجمالي الفاضي ولا يؤثر على السعر</span></div>
    <div class="mini-grid">
     <div class="field"><label>وزن الطرد التقريبي</label><select id="baleWeight" onchange="document.getElementById('customWeightWrap').style.display=this.value==='custom'?'block':'none';updateChickenEstimate();saveDraft()"><option value="8.2">8.2 كجم</option><option value="8.5">8.5 كجم</option><option value="custom">مخصص</option></select></div>
     <div class="field" id="customWeightWrap" style="display:none"><label>وزن الطرد المخصص</label><input id="customBaleWeight" type="number" step="0.1" value="8.2" oninput="updateChickenEstimate();saveDraft()"></div>
@@ -259,7 +296,7 @@ function openSale(editId=null){
     <div class="field"><label>عدد الطرود المحتسبة <small>(يمكن تعديله يدويًا)</small></label><input id="actualBales" type="number" min="0" step="1" value="0" oninput="markManualBales()"></div>
    </div>
    <div class="bale-summary">
-    <div class="bale-stat"><span>الطرود التقديرية</span><b><span id="estimatedBales">0</span> <small>طرد</small></b><em id="baleEstimateHint">على أساس الوزن الصافي</em></div>
+    <div class="bale-stat"><span>الطرود التقديرية</span><b><span id="estimatedBales">0</span> <small>طرد</small></b><em id="baleEstimateHint">على أساس إجمالي الفاضي</em></div>
     <div class="bale-stat is-counted"><span>الطرود المحتسبة</span><b><span id="calculatedBales">0</span> <small>طرد</small></b><em id="baleVariance">مطابق للتقدير</em></div>
     <div class="bale-stat"><span>الفراخ المحتسبة</span><b id="estimatedChickens" class="green">0</b><em>حسب متوسط الفراخ في الطرد</em></div>
     <div class="bale-stat"><span>المتبقي بعد الحمولة</span><b id="remainingChickens" class="gold">0</b><em>من رصيد المزرعة</em></div>
@@ -344,7 +381,7 @@ async function addSale(editId=null){
  const old=db.sales.find(x=>x.id==editId);
  let stock=getChickenStock();
  if(editId && old) stock += Number(old.chickensTaken)||0;
- const record={id:editId||Date.now(),createdAt:editId?(old?.createdAt||old?.id||Date.now()):Date.now(),date:editId?(old?.date||new Date().toISOString().slice(0,10)):new Date().toISOString().slice(0,10),owner,cycle:cycleObj.id,price,batches,empty:totalEmpty,full:totalFull,net,total:net*price,baleWeight,chickensPerBale,estimatedBales:net/baleWeight,actualBales,countedBales:actualBales,chickensTaken};
+ const record={id:editId||Date.now(),createdAt:editId?(old?.createdAt||old?.id||Date.now()):Date.now(),date:editId?(old?.date||new Date().toISOString().slice(0,10)):new Date().toISOString().slice(0,10),owner,cycle:cycleObj.id,price,batches,empty:totalEmpty,full:totalFull,net,total:net*price,baleWeight,chickensPerBale,estimatedBales:totalEmpty/baleWeight,actualBales,countedBales:actualBales,chickensTaken};
  db.chickenStock=stock-chickensTaken;
  if(editId){ const idx=db.sales.findIndex(x=>x.id==editId); if(idx>=0) db.sales[idx]=record; else db.sales.unshift(record); toast('تم تعديل الحمولة وتحديث عدد الفراخ ✓'); }
  else { db.sales.unshift(record); toast('تم حفظ الحمولة وأضيفت كعربية جديدة ✓'); }
@@ -395,7 +432,7 @@ function openCar(){document.getElementById('modalTitle').textContent='إضافة
 function addCar(){if(!owner.value)return toast('اكتب اسم صاحب العربية');db.cars.push({id:Date.now(),owner:owner.value,plate:plate.value,phone:phone.value});save();closeModal();toast('تمت إضافة العربية ✓')}
 function closeModal(){document.getElementById('modal').classList.remove('show')}
 function esc(value){return String(value??'').replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]))}
-function shipmentBaleEstimate(s){const weight=Number(s?.baleWeight)||8.2;return weight>0?Math.max(0,Number(s?.net)||0)/weight:0}
+function shipmentBaleEstimate(s){const weight=Number(s?.baleWeight)||8.2;return weight>0?Math.max(0,Number(s?.empty)||0)/weight:0}
 function shipmentBaleCount(s){return Math.max(0,Math.floor(Number(s?.countedBales??s?.actualBales)||0))}
 function shipmentBaleDifference(s){return shipmentBaleCount(s)-Math.round(shipmentBaleEstimate(s))}
 function shipmentBaleLabel(s){const estimated=shipmentBaleEstimate(s), counted=shipmentBaleCount(s);return `<span class="parcel-inline">${fmt(counted)} محتسبة / ${fmt(estimated)} تقديرية</span>`}
